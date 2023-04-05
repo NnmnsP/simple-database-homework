@@ -28,8 +28,10 @@ def main():
 
     # insert a new products
     logging.info('Inserting data...')
-    cur.execute(f"INSERT INTO products (name, price) VALUES ('{products[0][0]}', '{products[0][1]}')")
-    cur.execute(f"INSERT INTO products (name, price) VALUES ('{products[1][0]}', '{products[1][1]}')")
+    for product in products:
+        # if product[1] < 40000.00:
+        cur.execute(f"INSERT INTO products (name, price) VALUES ('{product[0]}', '{product[1]}')")
+
     conn.commit()
 
     # display the products
@@ -38,7 +40,6 @@ def main():
     rows = cur.fetchall()
     for row in rows:
         logging.info(row)
-
 
     # close the communication with the PostgreSQL
     cur.close()
